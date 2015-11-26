@@ -1,0 +1,11 @@
+#! /bin/bash
+set -e
+apt-get update
+apt-get install -y python-software-properties curl
+
+add-apt-repository -y ppa:chris-lea/node.js
+add-apt-repository -y ppa:mxmops/packages
+apt-get update
+
+apt-get install -y apt-transport-s3 nodejs
+apt-get update

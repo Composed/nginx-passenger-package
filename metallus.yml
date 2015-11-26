@@ -1,0 +1,25 @@
+packages:
+  branch_codenames:
+    master: trusty-unstable
+    production: trusty-stable
+
+jobs:
+  nginx:
+    builder: "make"
+    base: "quay.io/madebymany/build-bases:trusty"
+    build_depends:
+      - build-essential
+      - libcurl4-openssl-dev
+      - libpcre3-dev
+      - ruby2.0
+      - ruby2.0-dev
+    packages:
+      - type: debian
+        name: nginx-passenger
+        depends:
+          - libcurl3
+          - libssl1.0.0
+          - libpcre3
+        target: install
+        repos:
+          - mxm-public

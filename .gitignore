@@ -1,0 +1,10 @@
+.vagrant
+.built-dep
+.modules
+.source
+nginx-1.4.7/
+headers-*/
+passenger-*/
+passenger.tar.gz
+more-headers.tar.gz
+nginx.tar.gz

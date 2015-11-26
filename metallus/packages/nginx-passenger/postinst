@@ -1,0 +1,46 @@
+#!/bin/bash
+set -e
+
+upgraded_from=$2
+
+reload_service() {
+  service nginx restart
+}
+
+case "$1" in
+    configure)
+      if [[ ! -L /usr/sbin/nginx ]]
+      then
+        ln -s /etc/nginx/sbin/nginx /usr/sbin/nginx
+      fi
+
+      if [[ ! -f /etc/default/nginx ]]
+      then
+        echo "#nginx defaults" > /etc/nginx/default
+      fi
+
+      /usr/sbin/update-rc.d -f nginx defaults
+      chmod +x /etc/init.d/nginx
+      chmod +x /usr/sbin/nginx
+      logdir=/var/log/nginx
+      if [ ! -d "$logdir" -a ! -L "$logdir" ]; then
+        mkdir "$logdir"
+        chown www-data:adm $logdir
+        chmod 0750 $logdir
+      fi
+
+      reload_service || true
+    ;;
+
+    triggered)
+        reload_service
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "$APP_NAME $0 called with unknown argument '$1'" >&2
+        exit 1
+    ;;
+esac
