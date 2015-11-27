@@ -1,6 +1,6 @@
-PASSENGER_VERSION := 5.0.13
-NGINX_VERSION := 1.9.3
-MORE_HEADERS_VERSION := 0.261 
+PASSENGER_VERSION := 5.0.21
+NGINX_VERSION := 1.9.7
+MORE_HEADERS_VERSION := 0.28
 
 NGINX_TARBALL := nginx-$(NGINX_VERSION).tar.gz
 NGINX_URL := http://nginx.org/download/$(NGINX_TARBALL)
@@ -11,7 +11,7 @@ PASSENGER_URL := https://s3.amazonaws.com/phusion-passenger/releases/$(PASSENGER
 PASSENGER_DIR := passenger-$(PASSENGER_VERSION)
 
 MORE_HEADERS_TARBALL := more-headers-$(MORE_HEADERS_VERSION).tar.gz
-MORE_HEADERS_URL := https://codeload.github.com/agentzh/headers-more-nginx-module/tar.gz/v$(MORE_HEADERS_VERSION)
+MORE_HEADERS_URL := https://github.com/openresty/headers-more-nginx-module/archive/v${MORE_HEADERS_VERSION}.tar.gz
 MORE_HEADERS_DIR := headers-more-nginx-module-$(MORE_HEADERS_VERSION)
 
 UNTAR := tar -zxf
@@ -55,7 +55,7 @@ build: | $(NGINX_DIR) $(PASSENGER_DIR) $(MORE_HEADERS_DIR)
 			--with-http_stub_status_module \
 			--with-http_gzip_static_module \
 			--with-http_realip_module \
-			--add-module=$(CURDIR)/$(PASSENGER_DIR)/ext/nginx \
+			--add-module=$(CURDIR)/$(PASSENGER_DIR)/src/nginx_module \
 			--add-module=$(CURDIR)/$(MORE_HEADERS_DIR) && \
 		$(MAKE)
 	bundle install --deployment
