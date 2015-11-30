@@ -74,4 +74,4 @@ install:
 	cp -R vendor /etc/nginx/modules/passenger
 	cp -R .bundle /etc/nginx/modules/passenger
 	mkdir -p /etc/nginx/sites-enabled/
-	touch /etc/nginx/sites-enable/.dir
+	touch /etc/nginx/sites-enabled/.dir

@@ -18,7 +18,7 @@ jobs:
     packages:
       - type: debian
         name: nginx-passenger
-        version: 1.9.7-3
+        version: 1.9.7-4
         depends:
           - libcurl3
           - libssl1.0.0
