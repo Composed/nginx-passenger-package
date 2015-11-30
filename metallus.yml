@@ -7,6 +7,8 @@ jobs:
   nginx:
     builder: "make"
     base: "quay.io/madebymany/build-bases:trusty"
+    apt_repos:
+      - "ppa:brightbox/ruby-ng"
     build_depends:
       - build-essential
       - libcurl4-openssl-dev
@@ -16,10 +18,11 @@ jobs:
     packages:
       - type: debian
         name: nginx-passenger
+        version: 1.9.7-1
         depends:
           - libcurl3
           - libssl1.0.0
           - libpcre3
         target: install
         repos:
-          - mxm-public
+          - composed-public
